@@ -1,4 +1,4 @@
 # YottaHook
-It's a header only "library" that adds function hooks, it's intended to be as small as it can be, it's only 2~3 functions!(Depends on whether or not you are on x64, and the third function is just a "formality" to keep code clean anyways) and it's also my first attempt at messing around with function hooks in C/C++ so I have no idea if really works for all cases anyways :D x86 should work fine, but I have some doubts about x64(Mainly with the YH_FindNearbyMemory function), and also since it's designed to be as small as it can be it also gracefully ignores all errors!
+It's a header only "library" that adds function hooks, it's intended to be as small as it can be, it's only 2~3 functions!(Depends on whether or not you are on x64, and the third function is just a "formality" to keep code clean anyways) and it's also my first attempt at messing around with function hooks in C/C++ so I have no idea if it really works for all cases anyways :D x86 should work fine, but I have some doubts about x64(Mainly with the YH_FindNearbyMemory function), and also since it's designed to be as small as it can be it also gracefully ignores all errors!
 
-Basically just use [Minhook](https://github.com/TsudaKageyu/minhook) instead lol.
+Basically just use [MinHook](https://github.com/TsudaKageyu/minhook) instead lol.
