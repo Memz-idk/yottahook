@@ -12,7 +12,7 @@
 #define JMP64_LEN 14
 #define JMP64_OP_LEN 6
 
-void YH_FindNearbyMemory(void* target, SYSTEM_INFO* si, void** memory) {
+inline void YH_FindNearbyMemory(void* target, SYSTEM_INFO* si, void** memory) {
 	DWORD gran = si->dwAllocationGranularity;
 	uintptr_t startAddr = (uintptr_t)target;
 	startAddr -= startAddr % gran;
@@ -38,7 +38,7 @@ void YH_FindNearbyMemory(void* target, SYSTEM_INFO* si, void** memory) {
 	}
 }
 
-void YH_Hook(void* src, void* dst, void** tramp) {
+inline void YH_Hook(void* src, void* dst, void** tramp) {
 	SYSTEM_INFO si;
 	GetSystemInfo(&si);
 	void* trampAddr;
@@ -60,7 +60,7 @@ void YH_Hook(void* src, void* dst, void** tramp) {
 }
 
 #else
-void YH_Hook(void* src, void* dst, void** tramp) {
+inline void YH_Hook(void* src, void* dst, void** tramp) {
 	*tramp = VirtualAlloc(NULL, JMP32_LEN * 2, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
 	memcpy(*tramp, src, JMP32_LEN);
 	*(byte*)((uintptr_t)*tramp + JMP32_LEN) = JMP32;
@@ -75,7 +75,7 @@ void YH_Hook(void* src, void* dst, void** tramp) {
 #else
 #error "This is a Windows only header."
 #endif
-void YH_Unhook(void* func, void* tramp) {
+inline void YH_Unhook(void* func, void* tramp) {
 	DWORD oldProt;
 	VirtualProtect(func, JMP32_LEN, PAGE_EXECUTE_READWRITE, &oldProt);
 	memcpy(func, tramp, JMP32_LEN);
