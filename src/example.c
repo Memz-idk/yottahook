@@ -10,7 +10,7 @@ int WINAPI hkMessageBoxA(HWND hwnd, const char* text, const char* caption, unsig
 
 int main(void) {
 	for(;;) {
-		YH_Hook(MessageBoxA, hkMessageBoxA, (void*)&gMessageBoxA);
+		YH_Hook(MessageBoxA, hkMessageBoxA, (void**)&gMessageBoxA);
 		MessageBoxA(NULL, "Unhooked", "YottaHook", MB_OK);
 		YH_Unhook(MessageBoxA, gMessageBoxA);
 		MessageBoxA(NULL, "Unhooked", "YottaHook", MB_OK);

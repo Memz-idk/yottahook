@@ -21,7 +21,6 @@ inline void YH_FindNearbyMemory(void* target, SYSTEM_INFO* si, void** memory) {
 	uintptr_t highAddr = startAddr - gran;
 	uintptr_t lowAddr = startAddr - gran;
 	MEMORY_BASIC_INFORMATION mbi;
-	int memoryCount = 0;
 	while(highAddr < maxAddr && lowAddr > minAddr) {
 		VirtualQuery((void*)highAddr, &mbi, sizeof(mbi));
 		if(mbi.State == MEM_FREE) {
